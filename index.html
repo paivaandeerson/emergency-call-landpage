@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Call App - Em uma emergência, cada segundo conta!</title>
+    <style>
+        /* Modern CSS Reset & Variable Definitions */
+        :root {
+            --primary: #ef4444;
+            --primary-hover: #dc2626;
+            --primary-light: #fee2e2;
+            --dark: #0f172a;
+            --gray-dark: #334155;
+            --gray-light: #64748b;
+            --bg-light: #f8fafc;
+            --bg-card: #ffffff;
+            --accent: #f59e0b;
+            --accent-light: #fef3c7;
+            --whatsapp: #25d366;
+            --whatsapp-light: #e8f9f0;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography Helpers */
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--dark);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Layout Layout Wrapper */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation Bar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(241, 245, 249, 1);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            box-shadow: var(--shadow);
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        .logo-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--gray-dark);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.25);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(239, 68, 68, 0.35);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px 0;
+            background: radial-gradient(circle at 85% 15%, var(--primary-light) 0%, transparent 40%), var(--bg-light);
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .badge-urgent {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            letter-spacing: -1.5px;
+            margin-bottom: 24px;
+        }
+
+        .hero-desc {
+            font-size: 19px;
+            color: var(--gray-dark);
+            margin-bottom: 36px;
+            font-weight: 400;
+        }
+
+        .quote-box {
+            background-color: white;
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-style: italic;
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .download-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .store-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: var(--dark);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+        }
+
+        .store-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            background-color: #1e293b;
+        }
+
+        .store-btn svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        .store-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .store-text .small {
+            font-size: 11px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            font-weight: 500;
+        }
+
+        .store-text .bold {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .store-btn.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .store-btn.disabled:hover {
+            transform: none;
+            box-shadow: none;
+            background-color: var(--dark);
+        }
+
+        /* Phone & Tablet Device Mockup Showcase Frame */
+        .mockup-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phone-frame {
+            width: 320px;
+            height: 650px;
+            background-color: #000;
+            border-radius: 44px;
+            padding: 12px;
+            box-shadow: var(--shadow-lg), 0 25px 50px -12px rgba(0,0,0,0.25);
+            position: relative;
+            z-index: 2;
+            border: 4px solid #1e293b;
+        }
+
+        .phone-inner {
+            width: 100%;
+            height: 100%;
+            background-color: #f1f5f9;
+            border-radius: 34px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .phone-island {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 110px;
+            height: 30px;
+            background-color: #000;
+            border-radius: 20px;
+            z-index: 10;
+        }
+
+        .screenshot-carousel {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .screenshot-item {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Tablet frame floating behind */
+        .tablet-frame {
+            position: absolute;
+            left: -120px;
+            bottom: -20px;
+            width: 380px;
+            height: 500px;
+            background-color: #000;
+            border-radius: 28px;
+            padding: 10px;
+            box-shadow: var(--shadow-lg);
+            opacity: 0.85;
+            z-index: 1;
+            display: none;
+            border: 3px solid #1e293b;
+        }
+
+        @media (min-width: 1024px) {
+            .tablet-frame {
+                display: block;
+            }
+        }
+
+        .tablet-inner {
+            width: 100%;
+            height: 100%;
+            background-color: #f1f5f9;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .tablet-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Carousel Navigation Controls */
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+            position: absolute;
+            bottom: -50px;
+            z-index: 5;
+            width: 100%;
+        }
+
+        .control-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #cbd5e1;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .control-dot.active {
+            background-color: var(--primary);
+            width: 24px;
+            border-radius: 10px;
+        }
+
+        /* App Stats Counter Section */
+        .stats-section {
+            background-color: white;
+            padding: 60px 0;
+            border-bottom: 1px solid #f1f5f9;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .label {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gray-dark);
+        }
+
+        .stat-card .sub-label {
+            font-size: 14px;
+            color: var(--gray-light);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 64px auto;
+        }
+
+        .section-header h2 {
+            font-size: 38px;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--gray-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-card);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(241, 245, 249, 0.8);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon-wrapper {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .feature-icon-wrapper.red { background-color: var(--primary-light); color: var(--primary); }
+        .feature-icon-wrapper.purple { background-color: #f3e8ff; color: #a855f7; }
+        .feature-icon-wrapper.amber { background-color: var(--accent-light); color: var(--accent); }
+        .feature-icon-wrapper.blue { background-color: #e0f2fe; color: #0284c7; }
+        .feature-icon-wrapper.green { background-color: var(--whatsapp-light); color: var(--whatsapp); }
+
+        .feature-icon-wrapper svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--gray-light);
+            font-size: 15px;
+        }
+
+        /* Core Intelligence Capabilities Section */
+        .core-capabilities {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .capabilities-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .capability-box {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .capability-box svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .capability-box h4 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .capability-box p {
+            font-size: 14px;
+            color: var(--gray-light);
+        }
+
+        /* Premium Plan Pro Version Section */
+        .premium-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0;
+        }
+
+        @media (min-width: 768px) {
+            .premium-section {
+                border-radius: var(--radius-lg);
+                margin: 0 24px;
+            }
+        }
+
+        .premium-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        @media (min-width: 992px) {
+            .premium-grid {
+                grid-template-columns: 1.1fr 0.9fr;
+            }
+        }
+
+        .premium-content h2 {
+            color: white;
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+
+        .premium-content p {
+            color: #cbd5e1;
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(245, 158, 11, 0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .pro-feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .pro-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .pro-feature-item svg {
+            width: 22px;
+            height: 22px;
+            fill: #22c55e;
+        }
+
+        .pricing-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            padding: 48px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            position: relative;
+        }
+
+        .pricing-card::before {
+            content: 'VITALÍCIO';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--accent);
+            color: var(--dark);
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-card .title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .pricing-card .price {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 4px;
+            color: white;
+        }
+
+        .pricing-card .sub-text {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 32px;
+        }
+
+        /* Privacy Focus Banner */
+        .privacy-banner {
+            padding: 80px 0;
+            background-color: white;
+            text-align: center;
+        }
+
+        .privacy-box {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .privacy-box svg {
+            width: 64px;
+            height: 64px;
+            fill: #0284c7;
+            margin-bottom: 24px;
+        }
+
+        .privacy-box h3 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .privacy-box p {
+            color: var(--gray-light);
+            font-size: 16px;
+        }
+
+        /* Footer Layer */
+        footer {
+            background-color: var(--dark);
+            color: #94a3b8;
+            padding: 80px 0 40px 0;
+            font-size: 14px;
+            border-top: 1px solid #1e293b;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 48px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            color: white;
+            font-size: 20px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .footer-links-title {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .footer-links-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #1e293b;
+            padding-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Device Responsiveness Configurations */
+        @media (max-width: 991px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+                text-align: center;
+            }
+            .badge-urgent, .quote-box {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .quote-box {
+                border-left: none;
+                border-top: 4px solid var(--primary);
+                border-radius: 0 0 var(--radius-md) var(--radius-md);
+            }
+            .download-badges {
+                justify-content: center;
+            }
+            .hero h1 {
+                font-size: 40px;
+            }
+            .nav-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12s4.48 10 10 10 10-4.48 10-10zm-10 1a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm1-4H11V5h2v4z"/>
+                    </svg>
+                </div>
+                Emergency Call
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#features" class="nav-link">Recursos</a></li>
+                <li><a href="#pro" class="nav-link">Versão Pro</a></li>
+                <li><a href="#privacy" class="nav-link">Privacidade</a></li>
+            </ul>
+            <div>
+                <a href="#download" class="btn btn-primary">Baixar Agora</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="badge-urgent">
+                    <svg style="width:16px; height:16px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                    Cada segundo conta
+                </div>
+                <h1>Em uma emergência,<br>o número certo instantaneamente.</h1>
+                <p class="hero-desc">
+                    O <strong>Emergency Call App</strong> é o facilitador definitivo para você ter consigo todos os contatos vitais de socorro e assistência pública estruturados na palma da sua mão. Organizado, ultrarrápido e feito para proteger lives.
+                </p>
+                
+                <div class="quote-box">
+                    "É melhor ter e não precisar usar do que necessitar e não ter."
+                </div>
+
+                <div class="download-badges" id="download">
+                    <a href="https://play.google.com/store/apps/details?id=com.andersonpoliveira.emergencycallapp&pli=1" target="_blank" class="store-btn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5.25 2.25c-.15 0-.3.03-.44.09l11.44 11.44 3.44-3.44-14-.09c-.2-.01-.31-.1-.44-.22v-.22c.13-.12.24-.21.44-.22l14-.09-3.44-3.44L4.81 2.34c.14-.06.29-.09.44-.09zM4.25 3.5v17c0 .41.25.77.62.92l9.06-9.06L4.87 2.58c-.37.15-.62.51-.62.92zm11.19 7.34L20.5 7.25c.36-.21.5-.67.28-1.03-.21-.36-.67-.5-1.03-.28l-5.06 3.12 1.75 1.78zm-1.75 2.31l5.06 3.12c.16.1.34.15.52.15.22 0 .44-.07.62-.22.36-.21.5-.67.28-1.03l-4.73-3.8-1.75 1.78z"/>
+                        </svg>
+                        <div class="store-text">
+                            <span class="small">Disponível no</span>
+                            <span class="bold">Google Play</span>
+                        </div>
+                    </a>
+                    <a href="#" class="store-btn disabled" onclick="alert('Versão para iOS / App Store estará disponível em breve!'); return false;">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.58 2.95-1.39z"/>
+                        </svg>
+                        <div class="store-text">
+                            <span class="small">Em breve na</span>
+                            <span class="bold">App Store</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mockup-container">
+                <div class="tablet-frame">
+                    <div class="tablet-inner">
+                        <img src="Simulator Screenshot - iPad Air 13-inch (M4) - 2026-06-05 at 14.35.05.jpg" alt="Interface Tablet Emergency Call">
+                    </div>
+                </div>
+
+                <div class="phone-frame">
+                    <div class="phone-island"></div>
+                    <div class="phone-inner">
+                        <div class="screenshot-carousel" id="carousel">
+                            <div class="screenshot-item">
+                                <img src="Simulator Screenshot - iPhone 17 - 2026-06-04 at 12.09.36.jpg" alt="Emergency Call Main View">
+                            </div>
+                            <div class="screenshot-item">
+                                <img src="at12.06.22.jpg" alt="Settings Interface">
+                            </div>
+                            <div class="screenshot-item">
+                                <img src="Simulator Screenshot - iPhone 17 Pro Max - 2026-06-05 at 17.18.05.jpg" alt="Languages Menu Interface">
+                            </div>
+                            <div class="screenshot-item">
+                                <img src="Simulator Screenshot - iPhone 17 Pro Max - 2026-06-05 at 15.04.16.jpg" alt="Italian Context Sample">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-controls">
+                        <div class="control-dot active" onclick="jumpToSlide(0)"></div>
+                        <div class="control-dot" onclick="jumpToSlide(1)"></div>
+                        <div class="control-dot" onclick="jumpToSlide(2)"></div>
+                        <div class="control-dot" onclick="jumpToSlide(3)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container stats-grid">
+            <div class="stat-card">
+                <div class="number">93</div>
+                <div class="label">Países Cobertos</div>
+                <div class="sub-label">Ao redor de todo o mundo</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">948</div>
+                <div class="label">Contatos Verificados</div>
+                <div class="sub-label">Atualizados constantemente</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">50+</div>
+                <div class="label">Idiomas Suportados</div>
+                <div class="sub-label">Tradução automática inteligente</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>O que você encontra no App</h2>
+                <p>Acesso rápido e estruturado aos órgãos de segurança e apoio em qualquer cenário crítico.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper red">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3>Serviços Essenciais</h3>
+                    <p>Linhas diretas universais na ponta dos dedos: Ambulância (SAMU), Corpo de Bombeiros e Forças Policiais locais.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper purple">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                        </svg>
+                    </div>
+                    <h3>Proteção à Mulher</h3>
+                    <p>Canais rápidos e integrados de atendimento à violência doméstica e centrais especializadas de acolhimento.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper amber">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                    <h3>Defesa da Criança</h3>
+                    <p>Contatos e telefones oficiais de proteção à infância e combate a abusos infantis acessíveis com 1 toque.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper blue">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M21.99 8c0-.72-.37-1.35-.94-1.7L12 1 2.95 6.3C2.38 6.65 2 7.28 2 8v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8z"/>
+                        </svg>
+                    </div>
+                    <h3>Suporte ao Viajante</h3>
+                    <p>Indispensável para o exterior: acesse Polícia Turística, apoio consular direto e linhas exclusivas para estrangeiros.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper red">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </div>
+                    <h3>Saúde Mental & Crise</h3>
+                    <p>Redes integradas de prevenção ao suicídio, suporte psicológico imediato e linhas humanizadas de apoio emocional.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper green">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg>
+                    </div>
+                    <h3>Integração com WhatsApp</h3>
+                    <p>Comunicação moderna: acesso direto a canais e chats oficiais do WhatsApp de emergência em mais de 27 países.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="core-capabilities">
+        <div class="container capabilities-wrapper">
+            <div class="capability-box">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-12-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <div>
+                    <h4>Localização Inteligente Automática</h4>
+                    <p>O app identifica de forma autônoma o território em que você se encontra para sincronizar e exibir os números certos imediatamente.</p>
+                </div>
+            </div>
+            <div class="capability-box">
+                <svg viewBox="0 0 24 24"><path d="M12 22c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10zm-1-17.93c3.95.49 7 3.85 7 7.93 0 .62-.08 1.21-.21 1.79L13 9v1c0 1.1-.9 2-2 2v1.59l-3.41 3.41c-.38-.53-.68-1.13-.88-1.79h1.29c.55 0 1-.45 1-1v-1c0-1.1-.9-2-2-2H5.26c-.16-.63-.26-1.3-.26-2 0-4.08 3.05-7.44 7-7.93z"/></svg>
+                <div>
+                    <h4>Funciona Totalmente Offline</h4>
+                    <p>Sem sinal de dados móveis ou Wi-Fi? Não se preocupe. O banco de dados completo fica armazenado de forma offline para acesso irrestrito.</p>
+                </div>
+            </div>
+            <div class="capability-box">
+                <svg viewBox="0 0 24 24"><path d="M12 22C6.47 22 2 17.53 2 12S6.47 2 12 2s10 4.47 10 10-4.47 10-10 10zm1-5v-2h-2v2h2zm0-4V7h-2v6h2z"/></svg>
+                <div>
+                    <h4>Mudança de País com 1 Toque</h4>
+                    <p>Planejando viagens internacionais? Mude de país em segundos com um clique simples e conheça de antemão os ramais de apoio do destino.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="premium-section" id="pro">
+        <div class="container premium-grid">
+            <div class="premium-content">
+                <div class="premium-badge">
+                    <svg style="width:16px; height:16px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    Acesso Premium Vitalício
+                </div>
+                <h2>Eleve sua segurança ao máximo com a Versão PRO</h2>
+                <p>Garanta mais agilidade para momentos de extrema tensão eliminando distrações e integrando a segurança à tela inicial do seu aparelho.</p>
+                
+                <ul class="pro-feature-list">
+                    <li class="pro-feature-item">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        Zero Anúncios (Experiência Limpa e Sem Distrações)
+                    </li>
+                    <li class="pro-feature-item">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        Widget Customizado Exclusivo na Tela Inicial
+                    </li>
+                    <li class="pro-feature-item">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        Seus 3 contatos de emergência favoritos a um clique de distância
+                    </li>
+                    <li class="pro-feature-item">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        Pagamento Único — Acesso Vitalício Garantido
+                    </li>
+                </ul>
+            </div>
+
+            <div class="pricing-card">
+                <div class="title">Plano Pro Vitalício</div>
+                <div class="price">U$ 0.99</div>
+                <div class="sub-text">Sem assinaturas recorrentes, sem taxas ocultas.</div>
+                <a href="https://play.google.com/store/apps/details?id=com.andersonpoliveira.emergencycallapp&pli=1" target="_blank" class="btn btn-primary" style="width: 100%;">
+                    Fazer Upgrade no App
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="privacy-banner" id="privacy">
+        <div class="container privacy-box">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 6h2v2h-2V7zm0 4h2v6h-2v-6z"/>
+            </svg>
+            <h3>Privacidade Absoluta em Primeiro Lugar</h3>
+            <p>
+                Sua localização é processada estritamente de maneira local dentro do seu próprio dispositivo móvel exclusivamente para renderizar o endereço atual em tela durante uma chamada. Nossos servidores <strong>nunca coletam, transmitem ou armazenam</strong> seus dados com terceiros.
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <div class="footer-logo">
+                    <div class="logo-icon" style="width:32px; height:32px;">
+                        <svg style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12s4.48 10 10 10 10-4.48 10-10zm-10 1a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm1-4H11V5h2v4z"/>
+                        </svg>
+                    </div>
+                    Emergency Call
+                </div>
+                <p style="margin-top: 16px; line-height: 1.5;">Ninguém deveria perder tempo localizando números de resgate quando vidas estão em jogo. Baixe agora.</p>
+            </div>
+            <div>
+                <div class="footer-links-title">Navegação</div>
+                <ul class="footer-links-list">
+                    <li><a href="#features" class="footer-link">Recursos Principais</a></li>
+                    <li><a href="#pro" class="footer-link">Versão Pro</a></li>
+                    <li><a href="#privacy" class="footer-link">Políticas de Privacidade</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-links-title">Downloads</div>
+                <ul class="footer-links-list">
+                    <li><a href="https://play.google.com/store/apps/details?id=com.andersonpoliveira.emergencycallapp&pli=1" target="_blank" class="footer-link">Google Play Store</a></li>
+                    <li><a href="#" class="footer-link" onclick="alert('Versão para iOS em breve.'); return false;">Apple App Store (Breve)</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <div>&copy; 2026 Emergency Call App. Todos os direitos reservados.</div>
+            <div style="font-size: 12px; color: #64748b;">Desenvolvido com foco em acessibilidade e rapidez operacional.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Adjust Header Style dynamically on user scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Screenshot carousel slider functionality mechanics
+        const carousel = document.getElementById('carousel');
+        const dots = document.querySelectorAll('.control-dot');
+        let currentSlide = 0;
+        const totalSlides = 4;
+
+        function jumpToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, i) => {
+                if (i === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Automatic slide loop
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }, 4500);
+    </script>
+</body>
+</html>

@@ -862,7 +862,9 @@
                 max-width: 400px;
                 font-size: 16px !important;
                 padding: 12px !important;
-                background-color: white;
+                background-color: white !important;
+                position: relative;
+                z-index: 10;
             }
             
             .btn-primary {
@@ -870,11 +872,14 @@
                 max-width: 400px;
                 text-align: center;
                 justify-content: center;
+                position: relative;
+                z-index: 10;
+                background-color: var(--primary) !important;
             }
             
             /* Hero section */
             .hero {
-                padding: 120px 0 80px 0;
+                padding: 180px 0 80px 0;
             }
             
             .hero h1 {

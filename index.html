@@ -834,9 +834,19 @@
         /* Mobile Optimizations */
         @media (max-width: 768px) {
             /* Header adjustments */
+            header {
+                background-color: white;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            
             .nav-wrapper {
                 flex-wrap: wrap;
-                gap: 12px;
+                gap: 16px;
+                padding-top: 8px;
+            }
+            
+            .logo {
+                padding: 8px 0;
             }
             
             .nav-wrapper > div {
@@ -844,16 +854,20 @@
                 display: flex;
                 flex-direction: column;
                 gap: 12px;
+                align-items: center;
             }
             
             #language-selector {
                 width: 100%;
+                max-width: 400px;
                 font-size: 16px !important;
                 padding: 12px !important;
+                background-color: white;
             }
             
             .btn-primary {
                 width: 100%;
+                max-width: 400px;
                 text-align: center;
                 justify-content: center;
             }
@@ -904,11 +918,17 @@
             .download-badges {
                 flex-direction: column;
                 width: 100%;
+                align-items: center;
             }
             
             .download-badges a {
                 width: 100% !important;
-                max-width: 300px;
+                max-width: 320px;
+            }
+            
+            .store-btn {
+                width: 100% !important;
+                max-width: 320px;
             }
             
             /* Premium section */

@@ -845,12 +845,76 @@
                 Emergency Call
             </a>
             <ul class="nav-menu">
-                <li><a href="#features" class="nav-link">Recursos</a></li>
-                <li><a href="#pro" class="nav-link">Versão Pro</a></li>
-                <li><a href="#privacy" class="nav-link">Privacidade</a></li>
+                <li><a href="#features" class="nav-link" id="nav-resources">Recursos</a></li>
+                <li><a href="#pro" class="nav-link" id="nav-pro">Versão Pro</a></li>
+                <li><a href="#privacy" class="nav-link" id="nav-privacy">Privacidade</a></li>
             </ul>
-            <div>
-                <a href="#download" class="btn btn-primary">Baixar Agora</a>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <select id="language-selector" style="
+                    padding: 8px 12px;
+                    border: 2px solid var(--primary);
+                    border-radius: 8px;
+                    background: white;
+                    color: var(--dark);
+                    font-weight: 600;
+                    cursor: pointer;
+                    font-size: 14px;
+                    outline: none;
+                    transition: var(--transition);
+                " onchange="setLanguage(this.value)">
+                    <option value="en">🇬🇧 English</option>
+                    <option value="pt">🇧🇷 Português</option>
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="de">🇩🇪 Deutsch</option>
+                    <option value="it">🇮🇹 Italiano</option>
+                    <option value="ja">🇯🇵 日本語</option>
+                    <option value="zh">🇨🇳 中文</option>
+                    <option value="ru">🇷🇺 Русский</option>
+                    <option value="ar">🇸🇦 العربية</option>
+                    <option value="ko">🇰🇷 한국어</option>
+                    <option value="hi">🇮🇳 हिन्दी</option>
+                    <option value="tr">🇹🇷 Türkçe</option>
+                    <option value="nl">🇳🇱 Nederlands</option>
+                    <option value="pl">🇵🇱 Polski</option>
+                    <option value="sv">🇸🇪 Svenska</option>
+                    <option value="no">🇳🇴 Norsk</option>
+                    <option value="da">🇩🇰 Dansk</option>
+                    <option value="fi">🇫🇮 Suomi</option>
+                    <option value="cs">🇨🇿 Čeština</option>
+                    <option value="el">🇬🇷 Ελληνικά</option>
+                    <option value="he">🇮🇱 עברית</option>
+                    <option value="th">🇹🇭 ไทย</option>
+                    <option value="vi">🇻🇳 Tiếng Việt</option>
+                    <option value="id">🇮🇩 Bahasa Indonesia</option>
+                    <option value="ms">🇲🇾 Bahasa Melayu</option>
+                    <option value="tl">🇵🇭 Filipino</option>
+                    <option value="uk">🇺🇦 Українська</option>
+                    <option value="ro">🇷🇴 Română</option>
+                    <option value="hu">🇭🇺 Magyar</option>
+                    <option value="sk">🇸🇰 Slovenčina</option>
+                    <option value="bg">🇧🇬 Български</option>
+                    <option value="hr">🇭🇷 Hrvatski</option>
+                    <option value="sr">🇷🇸 Српски</option>
+                    <option value="sl">🇸🇮 Slovenščina</option>
+                    <option value="lt">🇱🇹 Lietuvių</option>
+                    <option value="lv">🇱🇻 Latviešu</option>
+                    <option value="et">🇪🇪 Eesti</option>
+                    <option value="mt">🇲🇹 Malti</option>
+                    <option value="ga">🇮🇪 Gaeilge</option>
+                    <option value="cy">🏴󠁧󠁢󠁷󠁬󠁳󠁿 Cymraeg</option>
+                    <option value="is">🇮🇸 Íslenska</option>
+                    <option value="mk">🇲🇰 Македонски</option>
+                    <option value="sq">🇦🇱 Shqip</option>
+                    <option value="bs">🇧🇦 Bosanski</option>
+                    <option value="ka">🇬🇪 ქართული</option>
+                    <option value="hy">🇦🇲 Հայերեն</option>
+                    <option value="az">🇦🇿 Azərbaycan</option>
+                    <option value="uz">🇺🇿 Oʻzbek</option>
+                    <option value="kk">🇰🇿 Қазақ</option>
+                    <option value="mn">🇲🇳 Монгол</option>
+                </select>
+                <a href="#download" class="btn btn-primary" id="btn-download">Baixar Agora</a>
             </div>
         </div>
     </header>
@@ -860,14 +924,14 @@
             <div class="hero-content">
                 <div class="badge-urgent">
                     <svg style="width:16px; height:16px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-                    Cada segundo conta
+                    <span id="badge-text">Cada segundo conta</span>
                 </div>
-                <h1>Em uma emergência,<br>o número certo instantaneamente.</h1>
-                <p class="hero-desc">
+                <h1 id="hero-title">Em uma emergência,<br>o número certo instantaneamente.</h1>
+                <p class="hero-desc" id="hero-desc">
                     O <strong>Emergency Call App</strong> é o facilitador definitivo para você ter consigo todos os contatos vitais de socorro e assistência pública estruturados na palma da sua mão. Organizado, ultrarrápido e feito para proteger lives.
                 </p>
                 
-                <div class="quote-box">
+                <div class="quote-box" id="quote-text">
                     "É melhor ter e não precisar usar do que necessitar e não ter."
                 </div>
 
@@ -964,19 +1028,19 @@
     <section class="stats-section">
         <div class="container stats-grid">
             <div class="stat-card">
-                <div class="number">93</div>
-                <div class="label">Países Cobertos</div>
-                <div class="sub-label">Ao redor de todo o mundo</div>
+                <div class="number" id="countries-number">93</div>
+                <div class="label" id="countries-label">Países Cobertos</div>
+                <div class="sub-label" id="countries-sub">Ao redor de todo o mundo</div>
             </div>
             <div class="stat-card">
-                <div class="number">948</div>
-                <div class="label">Contatos Verificados</div>
-                <div class="sub-label">Atualizados constantemente</div>
+                <div class="number" id="contacts-number">948</div>
+                <div class="label" id="contacts-label">Contatos Verificados</div>
+                <div class="sub-label" id="contacts-sub">Atualizados constantemente</div>
             </div>
             <div class="stat-card">
-                <div class="number">50+</div>
-                <div class="label">Idiomas Suportados</div>
-                <div class="sub-label">Tradução automática inteligente</div>
+                <div class="number" id="languages-number">50+</div>
+                <div class="label" id="languages-label">Idiomas Suportados</div>
+                <div class="sub-label" id="languages-sub">Tradução automática inteligente</div>
             </div>
         </div>
     </section>
@@ -984,8 +1048,8 @@
     <section class="features" id="features">
         <div class="container">
             <div class="section-header">
-                <h2>O que você encontra no App</h2>
-                <p>Acesso rápido e estruturado aos órgãos de segurança e apoio em qualquer cenário crítico.</p>
+                <h2 id="section-title-features">O que você encontra no App</h2>
+                <p id="section-desc-features">Acesso rápido e estruturado aos órgãos de segurança e apoio em qualquer cenário crítico.</p>
             </div>
 
             <div class="features-grid">
@@ -995,8 +1059,8 @@
                             <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
                         </svg>
                     </div>
-                    <h3>Serviços Essenciais</h3>
-                    <p>Linhas diretas universais na ponta dos dedos: Ambulância (SAMU), Corpo de Bombeiros e Forças Policiais locais.</p>
+                    <h3 id="feature-1-title">Serviços Essenciais</h3>
+                    <p id="feature-1-desc">Linhas diretas universais na ponta dos dedos: Ambulância (SAMU), Corpo de Bombeiros e Forças Policiais locais.</p>
                 </div>
 
                 <div class="feature-card">
@@ -1005,8 +1069,8 @@
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
                         </svg>
                     </div>
-                    <h3>Proteção à Mulher</h3>
-                    <p>Canais rápidos e integrados de atendimento à violência doméstica e centrais especializadas de acolhimento.</p>
+                    <h3 id="feature-2-title">Proteção à Mulher</h3>
+                    <p id="feature-2-desc">Canais rápidos e integrados de atendimento à violência doméstica e centrais especializadas de acolhimento.</p>
                 </div>
 
                 <div class="feature-card">
@@ -1015,8 +1079,8 @@
                             <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                         </svg>
                     </div>
-                    <h3>Defesa da Criança</h3>
-                    <p>Contatos e telefones oficiais de proteção à infância e combate a abusos infantis acessíveis com 1 toque.</p>
+                    <h3 id="feature-3-title">Defesa da Criança</h3>
+                    <p id="feature-3-desc">Contatos e telefones oficiais de proteção à infância e combate a abusos infantis acessíveis com 1 toque.</p>
                 </div>
 
                 <div class="feature-card">
@@ -1025,8 +1089,8 @@
                             <path d="M21.99 8c0-.72-.37-1.35-.94-1.7L12 1 2.95 6.3C2.38 6.65 2 7.28 2 8v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8z"/>
                         </svg>
                     </div>
-                    <h3>Suporte ao Viajante</h3>
-                    <p>Indispensável para o exterior: acesse Polícia Turística, apoio consular direto e linhas exclusivas para estrangeiros.</p>
+                    <h3 id="feature-4-title">Suporte ao Viajante</h3>
+                    <p id="feature-4-desc">Indispensável para o exterior: acesse Polícia Turística, apoio consular direto e linhas exclusivas para estrangeiros.</p>
                 </div>
 
                 <div class="feature-card">
@@ -1035,8 +1099,8 @@
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                         </svg>
                     </div>
-                    <h3>Saúde Mental & Crise</h3>
-                    <p>Redes integradas de prevenção ao suicídio, suporte psicológico imediato e linhas humanizadas de apoio emocional.</p>
+                    <h3 id="feature-5-title">Saúde Mental & Crise</h3>
+                    <p id="feature-5-desc">Redes integradas de prevenção ao suicídio, suporte psicológico imediato e linhas humanizadas de apoio emocional.</p>
                 </div>
 
                 <div class="feature-card">
@@ -1045,8 +1109,8 @@
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
                         </svg>
                     </div>
-                    <h3>Integração com WhatsApp</h3>
-                    <p>Comunicação moderna: acesso direto a canais e chats oficiais do WhatsApp de emergência em mais de 27 países.</p>
+                    <h3 id="feature-6-title">Integração com WhatsApp</h3>
+                    <p id="feature-6-desc">Comunicação moderna: acesso direto a canais e chats oficiais do WhatsApp de emergência em mais de 27 países.</p>
                 </div>
             </div>
         </div>
@@ -1057,22 +1121,22 @@
             <div class="capability-box">
                 <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-12-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                 <div>
-                    <h4>Localização Inteligente Automática</h4>
-                    <p>O app identifica de forma autônoma o território em que você se encontra para sincronizar e exibir os números certos imediatamente.</p>
+                    <h4 id="capability-1-title">Localização Inteligente Automática</h4>
+                    <p id="capability-1-desc">O app identifica de forma autônoma o território em que você se encontra para sincronizar e exibir os números certos imediatamente.</p>
                 </div>
             </div>
             <div class="capability-box">
                 <svg viewBox="0 0 24 24"><path d="M12 22c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10zm-1-17.93c3.95.49 7 3.85 7 7.93 0 .62-.08 1.21-.21 1.79L13 9v1c0 1.1-.9 2-2 2v1.59l-3.41 3.41c-.38-.53-.68-1.13-.88-1.79h1.29c.55 0 1-.45 1-1v-1c0-1.1-.9-2-2-2H5.26c-.16-.63-.26-1.3-.26-2 0-4.08 3.05-7.44 7-7.93z"/></svg>
                 <div>
-                    <h4>Funciona Totalmente Offline</h4>
-                    <p>Sem sinal de dados móveis ou Wi-Fi? Não se preocupe. O banco de dados completo fica armazenado de forma offline para acesso irrestrito.</p>
+                    <h4 id="capability-2-title">Funciona Totalmente Offline</h4>
+                    <p id="capability-2-desc">Sem sinal de dados móveis ou Wi-Fi? Não se preocupe. O banco de dados completo fica armazenado de forma offline para acesso irrestrito.</p>
                 </div>
             </div>
             <div class="capability-box">
                 <svg viewBox="0 0 24 24"><path d="M12 22C6.47 22 2 17.53 2 12S6.47 2 12 2s10 4.47 10 10-4.47 10-10 10zm1-5v-2h-2v2h2zm0-4V7h-2v6h2z"/></svg>
                 <div>
-                    <h4>Mudança de País com 1 Toque</h4>
-                    <p>Planejando viagens internacionais? Mude de país em segundos com um clique simples e conheça de antemão os ramais de apoio do destino.</p>
+                    <h4 id="capability-3-title">Mudança de País com 1 Toque</h4>
+                    <p id="capability-3-desc">Planejando viagens internacionais? Mude de país em segundos com um clique simples e conheça de antemão os ramais de apoio do destino.</p>
                 </div>
             </div>
         </div>
@@ -1083,36 +1147,36 @@
             <div class="premium-content">
                 <div class="premium-badge">
                     <svg style="width:16px; height:16px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                    Acesso Premium Vitalício
+                    <span id="pro-badge">Acesso Premium Vitalício</span>
                 </div>
-                <h2>Eleve sua segurança ao máximo com a Versão PRO</h2>
-                <p>Garanta mais agilidade para momentos de extrema tensão eliminando distrações e integrando a segurança à tela inicial do seu aparelho.</p>
+                <h2 id="pro-title">Eleve sua segurança ao máximo com a Versão PRO</h2>
+                <p id="pro-desc">Garanta mais agilidade para momentos de extrema tensão eliminando distrações e integrando a segurança à tela inicial do seu aparelho.</p>
                 
                 <ul class="pro-feature-list">
                     <li class="pro-feature-item">
                         <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                        Zero Anúncios (Experiência Limpa e Sem Distrações)
+                        <span id="pro-feature-1">Zero Anúncios (Experiência Limpa e Sem Distrações)</span>
                     </li>
                     <li class="pro-feature-item">
                         <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                        Widget Customizado Exclusivo na Tela Inicial
+                        <span id="pro-feature-2">Widget Customizado Exclusivo na Tela Inicial</span>
                     </li>
                     <li class="pro-feature-item">
                         <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                        Seus 3 contatos de emergência favoritos a um clique de distância
+                        <span id="pro-feature-3">Seus 3 contatos de emergência favoritos a um clique de distância</span>
                     </li>
                     <li class="pro-feature-item">
                         <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                        Pagamento Único — Acesso Vitalício Garantido
+                        <span id="pro-feature-4">Pagamento Único — Acesso Vitalício Garantido</span>
                     </li>
                 </ul>
             </div>
 
             <div class="pricing-card">
-                <div class="title">Plano Pro Vitalício</div>
-                <div class="price">U$ 0.99</div>
-                <div class="sub-text">Sem assinaturas recorrentes, sem taxas ocultas.</div>
-                <a href="https://play.google.com/store/apps/details?id=com.andersonpoliveira.emergencycallapp&pli=1" target="_blank" class="btn btn-primary" style="width: 100%;">
+                <div class="title" id="pricing-title">Plano Pro Vitalício</div>
+                <div class="price" id="pricing-price">U$ 0.99</div>
+                <div class="sub-text" id="pricing-sub">Sem assinaturas recorrentes, sem taxas ocultas.</div>
+                <a href="https://play.google.com/store/apps/details?id=com.andersonpoliveira.emergencycallapp&pli=1" target="_blank" class="btn btn-primary" style="width: 100%;" id="pricing-btn">
                     Fazer Upgrade no App
                 </a>
             </div>
@@ -1124,8 +1188,8 @@
             <svg viewBox="0 0 24 24">
                 <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 6h2v2h-2V7zm0 4h2v6h-2v-6z"/>
             </svg>
-            <h3>Privacidade Absoluta em Primeiro Lugar</h3>
-            <p>
+            <h3 id="privacy-title">Privacidade Absoluta em Primeiro Lugar</h3>
+            <p id="privacy-desc">
                 Sua localização é processada estritamente de maneira local dentro do seu próprio dispositivo móvel exclusivamente para renderizar o endereço atual em tela durante uma chamada. Nossos servidores <strong>nunca coletam, transmitem ou armazenam</strong> seus dados com terceiros.
             </p>
         </div>
@@ -1145,15 +1209,15 @@
                 <p style="margin-top: 16px; line-height: 1.5;">Ninguém deveria perder tempo localizando números de resgate quando vidas estão em jogo. Baixe agora.</p>
             </div>
             <div>
-                <div class="footer-links-title">Navegação</div>
+                <div class="footer-links-title" id="footer-nav-title">Navegação</div>
                 <ul class="footer-links-list">
-                    <li><a href="#features" class="footer-link">Recursos Principais</a></li>
-                    <li><a href="#pro" class="footer-link">Versão Pro</a></li>
-                    <li><a href="#privacy" class="footer-link">Políticas de Privacidade</a></li>
+                    <li><a href="#features" class="footer-link" id="footer-link-features">Recursos Principais</a></li>
+                    <li><a href="#pro" class="footer-link" id="footer-link-pro">Versão Pro</a></li>
+                    <li><a href="#privacy" class="footer-link" id="footer-link-privacy">Políticas de Privacidade</a></li>
                 </ul>
             </div>
             <div>
-                <div class="footer-links-title">Downloads</div>
+                <div class="footer-links-title" id="footer-downloads-title">Downloads</div>
                 <ul class="footer-links-list">
                     <li><a href="https://play.google.com/store/apps/details?id=com.andersonpoliveira.emergencycallapp&pli=1" target="_blank" class="footer-link">Google Play Store</a></li>
                     <li><a href="#" class="footer-link" onclick="alert('Versão para iOS em breve.'); return false;">Apple App Store (Breve)</a></li>
@@ -1161,8 +1225,8 @@
             </div>
         </div>
         <div class="container footer-bottom">
-            <div>&copy; 2026 Emergency Call App. Todos os direitos reservados.</div>
-            <div style="font-size: 12px; color: #64748b;">Desenvolvido com foco em acessibilidade e rapidez operacional.</div>
+            <div id="footer-rights">&copy; 2026 Emergency Call App. Todos os direitos reservados.</div>
+            <div style="font-size: 12px; color: #64748b;" id="footer-dev">Desenvolvido com foco em acessibilidade e rapidez operacional.</div>
         </div>
     </footer>
 
@@ -1218,6 +1282,20 @@
             currentSlide = (currentSlide + 1) % totalSlides;
             updateCarousel();
         }, 4500);
+    </script>
+
+    <!-- i18n System - Auto-detects user language -->
+    <script src="js/i18n.js"></script>
+    <script src="js/apply-translations.js"></script>
+    <script>
+        // Set language selector to current language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentLang = getCurrentLanguage();
+            const selector = document.getElementById('language-selector');
+            if (selector && currentLang) {
+                selector.value = currentLang;
+            }
+        });
     </script>
 </body>
 </html>

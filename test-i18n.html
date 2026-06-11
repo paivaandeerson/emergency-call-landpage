@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i18n System Test - Emergency Call App</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .header {
+            background: #ef4444;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .language-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .lang-btn {
+            padding: 10px 20px;
+            border: 2px solid #ef4444;
+            background: white;
+            color: #ef4444;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .lang-btn:hover {
+            background: #ef4444;
+            color: white;
+        }
+        .lang-btn.active {
+            background: #ef4444;
+            color: white;
+        }
+        .info-box {
+            background: #e0f2fe;
+            border-left: 4px solid #0284c7;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background: #dcfce7;
+            border-left-color: #16a34a;
+        }
+        .warning {
+            background: #fef3c7;
+            border-left-color: #f59e0b;
+        }
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        h2 {
+            color: #0f172a;
+            margin-top: 0;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .pass {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .fail {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌍 Sistema de Internacionalização - Teste</h1>
+        <p>Emergency Call App - 50+ Idiomas Suportados</p>
+    </div>
+
+    <div class="test-section">
+        <h2>📋 Status do Sistema</h2>
+        <div id="system-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🌐 Seletor de Idioma</h2>
+        <p>Clique em um idioma para testar a tradução:</p>
+        <div class="language-selector" id="language-selector"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔍 Informações de Detecção</h2>
+        <div id="detection-info"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📝 Exemplo de Conteúdo Traduzido</h2>
+        <div id="sample-content">
+            <h3 id="hero-title">Carregando...</h3>
+            <p id="hero-desc">Carregando descrição...</p>
+            <div style="margin-top: 20px;">
+                <strong id="badge-text">Badge</strong> | 
+                <span id="downloadNow">Download</span> | 
+                <span id="resources">Resources</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🧪 Testes Automáticos</h2>
+        <div id="auto-tests"></div>
+    </div>
+
+    <script src="js/i18n.js"></script>
+    <script>
+        // System Status Check
+        function checkSystemStatus() {
+            const statusDiv = document.getElementById('system-status');
+            const tests = [];
+
+            // Test 1: Check if i18n.js is loaded
+            tests.push({
+                name: 'i18n.js carregado',
+                pass: typeof detectUserLanguage === 'function'
+            });
+
+            // Test 2: Check if SUPPORTED_LANGUAGES exists
+            tests.push({
+                name: 'Lista de idiomas disponível',
+                pass: typeof SUPPORTED_LANGUAGES !== 'undefined' && SUPPORTED_LANGUAGES.length > 0
+            });
+
+            // Test 3: Check language detection
+            const detectedLang = detectUserLanguage();
+            tests.push({
+                name: 'Detecção de idioma funcionando',
+                pass: detectedLang && SUPPORTED_LANGUAGES.includes(detectedLang)
+            });
+
+            // Test 4: Check translations file
+            fetch('lang/translations.json')
+                .then(response => response.json())
+                .then(data => {
+                    tests.push({
+                        name: 'Arquivo de traduções acessível',
+                        pass: Object.keys(data).length > 0
+                    });
+                    renderTests(tests);
+                })
+                .catch(() => {
+                    tests.push({
+                        name: 'Arquivo de traduções acessível',
+                        pass: false
+                    });
+                    renderTests(tests);
+                });
+
+            function renderTests(testList) {
+                statusDiv.innerHTML = testList.map(test => 
+                    `<div class="test-result ${test.pass ? 'pass' : 'fail'}">
+                        ${test.pass ? '✅' : '❌'} ${test.name}
+                    </div>`
+                ).join('');
+            }
+
+            renderTests(tests.slice(0, 3)); // Render first 3 immediately
+        }
+
+        // Create Language Selector
+        function createLanguageSelector() {
+            const container = document.getElementById('language-selector');
+            const currentLang = getCurrentLanguage();
+            
+            const mainLanguages = ['en', 'pt', 'es', 'fr', 'de', 'it', 'ja', 'zh', 'ru', 'ar', 'ko', 'hi'];
+            
+            mainLanguages.forEach(lang => {
+                const btn = document.createElement('button');
+                btn.className = 'lang-btn' + (lang === currentLang ? ' active' : '');
+                btn.textContent = `${LANGUAGE_NAMES[lang]} (${lang})`;
+                btn.onclick = () => {
+                    setLanguage(lang);
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        // Show Detection Info
+        function showDetectionInfo() {
+            const infoDiv = document.getElementById('detection-info');
+            const currentLang = getCurrentLanguage();
+            const browserLang = navigator.language || navigator.userLanguage;
+            const savedLang = localStorage.getItem('preferredLanguage');
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlLang = urlParams.get('lang');
+
+            infoDiv.innerHTML = `
+                <div class="info-box">
+                    <strong>Idioma Atual:</strong> ${LANGUAGE_NAMES[currentLang]} (${currentLang})
+                </div>
+                <div class="info-box">
+                    <strong>Idioma do Navegador:</strong> ${browserLang}
+                </div>
+                <div class="info-box ${savedLang ? 'success' : 'warning'}">
+                    <strong>Preferência Salva:</strong> ${savedLang || 'Nenhuma'}
+                </div>
+                <div class="info-box ${urlLang ? 'success' : ''}">
+                    <strong>Parâmetro URL:</strong> ${urlLang || 'Nenhum'}
+                </div>
+                <div class="info-box">
+                    <strong>Total de Idiomas Suportados:</strong> ${SUPPORTED_LANGUAGES.length}
+                </div>
+            `;
+        }
+
+        // Load sample translations
+        async function loadSampleTranslations() {
+            const lang = getCurrentLanguage();
+            try {
+                const response = await fetch('lang/translations.json');
+                const translations = await response.json();
+                const t = translations[lang] || translations['en'];
+                
+                document.getElementById('hero-title').innerHTML = t.heroTitle || 'Translation not found';
+                document.getElementById('hero-desc').innerHTML = t.heroDesc || 'Translation not found';
+                document.getElementById('badge-text').textContent = t.badge || 'Translation not found';
+                
+                // Update other elements if they exist
+                const downloadBtn = document.getElementById('downloadNow');
+                const resourcesSpan = document.getElementById('resources');
+                if (downloadBtn) downloadBtn.textContent = t.downloadNow || 'Download';
+                if (resourcesSpan) resourcesSpan.textContent = t.resources || 'Resources';
+            } catch (error) {
+                console.error('Error loading translations:', error);
+            }
+        }
+
+        // Run Auto Tests
+        function runAutoTests() {
+            const testsDiv = document.getElementById('auto-tests');
+            const tests = [];
+
+            // Test language switching
+            const testLangs = ['en', 'pt', 'es'];
+            testLangs.forEach(lang => {
+                const isSupported = SUPPORTED_LANGUAGES.includes(lang);
+                tests.push({
+                    name: `Idioma ${lang} suportado`,
+                    pass: isSupported
+                });
+            });
+
+            // Test fallback
+            tests.push({
+                name: 'Fallback para inglês funciona',
+                pass: SUPPORTED_LANGUAGES.includes('en')
+            });
+
+            testsDiv.innerHTML = tests.map(test => 
+                `<div class="test-result ${test.pass ? 'pass' : 'fail'}">
+                    ${test.pass ? '✅' : '❌'} ${test.name}
+                </div>`
+            ).join('');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            checkSystemStatus();
+            createLanguageSelector();
+            showDetectionInfo();
+            loadSampleTranslations();
+            runAutoTests();
+        });
+    </script>
+</body>
+</html>

@@ -1,10 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
+<!-- Default / Portuguese -->
 <url>
   <loc>https://paivaandeerson.github.io/emergency-call-landpage/</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=en"/>
+  <xhtml:link rel="alternate" hreflang="pt" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=pt"/>
+  <xhtml:link rel="alternate" hreflang="es" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=es"/>
+  <xhtml:link rel="alternate" hreflang="fr" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=fr"/>
+  <xhtml:link rel="alternate" hreflang="de" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=de"/>
+  <xhtml:link rel="alternate" hreflang="it" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=it"/>
+  <xhtml:link rel="alternate" hreflang="ja" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=ja"/>
+  <xhtml:link rel="alternate" hreflang="zh" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=zh"/>
+  <xhtml:link rel="alternate" hreflang="ru" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=ru"/>
+  <xhtml:link rel="alternate" hreflang="ar" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=ar"/>
+  <xhtml:link rel="alternate" hreflang="ko" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=ko"/>
+  <xhtml:link rel="alternate" hreflang="hi" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=hi"/>
+  <xhtml:link rel="alternate" hreflang="tr" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=tr"/>
+  <xhtml:link rel="alternate" hreflang="nl" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=nl"/>
+  <xhtml:link rel="alternate" hreflang="pl" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=pl"/>
+  <xhtml:link rel="alternate" hreflang="sv" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=sv"/>
+  <xhtml:link rel="alternate" hreflang="no" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=no"/>
+  <xhtml:link rel="alternate" hreflang="da" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=da"/>
+  <xhtml:link rel="alternate" hreflang="fi" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=fi"/>
+  <xhtml:link rel="alternate" hreflang="cs" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=cs"/>
+  <xhtml:link rel="alternate" hreflang="el" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=el"/>
+  <xhtml:link rel="alternate" hreflang="he" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=he"/>
+  <xhtml:link rel="alternate" hreflang="th" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=th"/>
+  <xhtml:link rel="alternate" hreflang="vi" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=vi"/>
+  <xhtml:link rel="alternate" hreflang="id" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=id"/>
+  <xhtml:link rel="alternate" hreflang="ms" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=ms"/>
+  <xhtml:link rel="alternate" hreflang="tl" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=tl"/>
+  <xhtml:link rel="alternate" hreflang="uk" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=uk"/>
+  <xhtml:link rel="alternate" hreflang="ro" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=ro"/>
+  <xhtml:link rel="alternate" hreflang="hu" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=hu"/>
+  <xhtml:link rel="alternate" hreflang="sk" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=sk"/>
+  <xhtml:link rel="alternate" hreflang="bg" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=bg"/>
+  <xhtml:link rel="alternate" hreflang="hr" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=hr"/>
+  <xhtml:link rel="alternate" hreflang="sr" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=sr"/>
+  <xhtml:link rel="alternate" hreflang="sl" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=sl"/>
+  <xhtml:link rel="alternate" hreflang="lt" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=lt"/>
+  <xhtml:link rel="alternate" hreflang="lv" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=lv"/>
+  <xhtml:link rel="alternate" hreflang="et" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=et"/>
+  <xhtml:link rel="alternate" hreflang="mt" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=mt"/>
+  <xhtml:link rel="alternate" hreflang="ga" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=ga"/>
+  <xhtml:link rel="alternate" hreflang="cy" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=cy"/>
+  <xhtml:link rel="alternate" hreflang="is" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=is"/>
+  <xhtml:link rel="alternate" hreflang="mk" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=mk"/>
+  <xhtml:link rel="alternate" hreflang="sq" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=sq"/>
+  <xhtml:link rel="alternate" hreflang="bs" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=bs"/>
+  <xhtml:link rel="alternate" hreflang="ka" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=ka"/>
+  <xhtml:link rel="alternate" hreflang="hy" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=hy"/>
+  <xhtml:link rel="alternate" hreflang="az" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=az"/>
+  <xhtml:link rel="alternate" hreflang="uz" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=uz"/>
+  <xhtml:link rel="alternate" hreflang="kk" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=kk"/>
+  <xhtml:link rel="alternate" hreflang="mn" href="https://paivaandeerson.github.io/emergency-call-landpage/?lang=mn"/>
+  <xhtml:link rel="alternate" hreflang="x-default" href="https://paivaandeerson.github.io/emergency-call-landpage/"/>
   <priority>1.0</priority>
+  <changefreq>weekly</changefreq>
 </url>
 
 </urlset>
+
+<!-- Made with Bob -->
